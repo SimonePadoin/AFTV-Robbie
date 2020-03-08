@@ -1,0 +1,33 @@
+module.exports = (Discord, message, prefix) => {
+
+  let comma_index = message.content.indexOf(',');
+
+  let num1 = message.content.substring((prefix + 'r ').length, comma_index);
+  num1 = parseInt(num1);
+
+  let num2 = message.content.substring(comma_index + 1);
+  num2 = parseInt(num2);
+
+  if (comma_index == -1 || isNaN(num1) || isNaN(num2)) {
+    let log = `Successful error reply to ${message.content}`;
+    message.reply(`Wrong usage bossman \`(Use it like this: ${prefix}r n1,n2)\``)
+    .then(console.log(log))
+    .catch(console.error);
+    return log;
+  }
+
+  let min = Math.min(num1, num2);
+  let max = Math.max(num1, num2);
+
+  // Inclusive random integers from Math.random() MDN web docs
+  let random = Math.floor(Math.random() * (max - min + 1)) + min;
+
+  message.reply(`It's `\`${random}\`` bossman`) 
+  ;
+
+  message.channel.send(rich_embed)
+  .then(console.log(`Successful command reply to ${message.content}`))
+  .catch(console.error);
+  return rich_embed;
+
+}
